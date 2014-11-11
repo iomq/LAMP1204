@@ -1,4 +1,4 @@
-# LAMP1204
-# 0.0.0.2
+# DEVLAMP (Ubuntu 12.04)
+# 0.0.0.3
 
-Docker LAMP1204 Test
+Docker: DEVLAMP1204 (debs: no config)
