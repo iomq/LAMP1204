@@ -20,7 +20,7 @@ RUN apt-get -y install apache2 libapache2-mod-php5 php5-mysql php5-gd php5-mcryp
 RUN apt-get -y install php-apc
 RUN apt-get -y install php5-cli
 RUN apt-get -y install php5-xdebug
-RUN echo "0.0.0.15" > /etc/iomq_version
+RUN echo "0.0.0.16" > /etc/iomq_version
 RUN apt-get update -qq && apt-get -y dselect-upgrade
 
 ADD https://phar.phpunit.de/phpunit.phar /usr/local/bin/phpunit
