@@ -20,7 +20,7 @@ RUN apt-get -y install apache2 libapache2-mod-php5 php5-mysql php5-gd php5-mcryp
 RUN apt-get -y install php-apc
 RUN apt-get -y install php5-cli
 RUN apt-get -y install php5-xdebug
-RUN echo "0.1.20150907.0" > /etc/iomq_version
+RUN echo "0.1.20150907.1" > /etc/iomq_version
 RUN apt-get update -qq && apt-get -y dselect-upgrade
 
 ADD https://phar.phpunit.de/phpunit.phar /usr/local/bin/phpunit
@@ -45,7 +45,6 @@ ADD sysctl.txt /sysctl.txt
 
 RUN chmod 755 /*.sh
 
-RUN echo "NameVirtualHost *:8080 \nListen 8080" >> /etc/apache2/ports.conf
 RUN cat /sysctl.txt >> /etc/sysctl.conf
 
 # Remove standard database

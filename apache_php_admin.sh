@@ -43,5 +43,6 @@ find $WORKDIR -type d | xargs chmod 775
     fi
 fi
 
+sed -i -e"s/ports.conf/ports.conf\nInclude \/docker\/conf\/apache\/ports1204.conf/" /etc/apache2/apache2.conf
 sed -i -e"s/APACHE_RUN_USER=www-data/APACHE_RUN_USER=$APACHE_USER/" /etc/apache2/envvars
 sed -i -e"s/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=$APACHE_GROUP/" /etc/apache2/envvars
