@@ -20,7 +20,7 @@ RUN apt-get -y install apache2 libapache2-mod-php5 php5-mysql php5-gd php5-mcryp
 RUN apt-get -y install php-apc
 RUN apt-get -y install php5-cli
 RUN apt-get -y install php5-xdebug
-RUN echo "0.0.0.24" > /etc/iomq_version
+RUN echo "0.1.20150907.0" > /etc/iomq_version
 RUN apt-get update -qq && apt-get -y dselect-upgrade
 
 ADD https://phar.phpunit.de/phpunit.phar /usr/local/bin/phpunit
@@ -28,3 +28,34 @@ ADD https://phar.phpunit.de/phpcpd.phar /usr/local/bin/phpcpd
 ADD https://phar.phpunit.de/phpdcd.phar /usr/local/bin/phpdcd
 ADD https://phar.phpunit.de/phploc.phar /usr/local/bin/phploc
 RUN chmod a+rx /usr/local/bin/php*
+
+# Add scripts / configuration
+ADD start-apache2.sh /start-apache2.sh
+ADD start-mysqld.sh /start-mysqld.sh
+ADD supervisord-apache2.conf /etc/supervisor/conf.d/supervisord-apache2.conf
+ADD supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
+ADD run.sh /run.sh
+ADD mysql_admin.sh /mysql_admin.sh
+ADD create_mysql_admin_user.sh /create_mysql_admin_user.sh
+ADD my.cnf /etc/mysql/conf.d/my.cnf
+ADD apache_php_admin.sh /apache_php_admin.sh
+ADD dockerprofile.sh /etc/profile.d/dockerprofile.sh
+ADD local.txt /var/lib/locales/supported.d/local
+ADD sysctl.txt /sysctl.txt
+
+RUN chmod 755 /*.sh
+
+RUN echo "NameVirtualHost *:8080 \nListen 8080" >> /etc/apache2/ports.conf
+RUN cat /sysctl.txt >> /etc/sysctl.conf
+
+# Remove standard database
+RUN rm -rf /var/lib/mysql/*
+
+# Add Apache-Mod
+RUN a2enmod rewrite
+
+EXPOSE 80
+EXPOSE 8080
+EXPOSE 3306
+EXPOSE 9000
+CMD ["/run.sh"]
