@@ -16,11 +16,11 @@ RUN apt-get -y install supervisor
 RUN apt-get -y install ssmtp
 RUN apt-get -y install mysql-server mysql-client
 RUN apt-get -y install graphicsmagick graphicsmagick-imagemagick-compat language-pack-de gettext intltool catdoc htmldoc
-RUN apt-get -y install apache2 libapache2-mod-php5 php5-mysql php5-gd php5-mcrypt php5-curl php5-xsl
+RUN apt-get -y install apache2 lynx libapache2-mod-php5 php5-mysql php5-gd php5-mcrypt php5-curl php5-xsl
 RUN apt-get -y install php-apc
 RUN apt-get -y install php5-cli
 RUN apt-get -y install php5-xdebug
-RUN echo "0.1.20160317.0" > /etc/iomq_version
+RUN echo "0.1.20160421.0" > /etc/iomq_version
 RUN apt-get update -qq && apt-get -y dselect-upgrade
 
 ADD https://phar.phpunit.de/phpunit-old.phar /usr/local/bin/phpunit
