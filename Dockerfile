@@ -7,6 +7,7 @@ ENV DOCKER_DIR /docker
 ENV DOCKERXDEBUG YES
 
 # Install packages
+RUN echo "0.1.20161004.1" >> /etc/iomq_version
 RUN apt-get update
 RUN apt-get -y dselect-upgrade
 RUN apt-get -y install apt-utils dialog
@@ -21,7 +22,7 @@ RUN apt-get -y install php-apc
 RUN apt-get -y install php5-cli
 RUN apt-get -y install php5-xdebug
 RUN apt-get -y install pv
-RUN echo "0.1.20161004.0" > /etc/iomq_version
+RUN echo "0.1.20161004.1" >> /etc/iomq_version
 RUN apt-get update -qq && apt-get -y dselect-upgrade
 
 ADD https://phar.phpunit.de/phpunit-old.phar /usr/local/bin/phpunit
